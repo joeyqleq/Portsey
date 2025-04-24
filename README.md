@@ -1,30 +1,96 @@
-# Portsey
+# Portsey v2 🚀
 
-Portsey is my first complete Python3 script and is a little bit like the "netstat -tuln" command, showing the open ports on a machine but with the added benefit of tying this data to local services, binaries and processes just as the "lsof" or "ss" commands would. I recommend creating an alias to run this Python script for quicker access.
+Portsey is a polished, modern Python script that shows all open ports on your machine — like `netstat -tuln` — but with a much richer output. It ties each open port to its related process, binary, and Docker container (if running), thanks to the power of `lsof` and Python. 
 
-I've looked all over the internet for something similar, and I couldnt find anything to satisfy my requirements. You will find loads of people coming up with the most sophisticated methods in piping either netstat, ss, or lsof with each other, while utilizing obscure arguments to acheive a specific scenario but for my case, all I wanted was a simple yet complete way to qeury my local or remote servers IP ports. 
+No more memorizing complex terminal one-liners — Portsey gives you all the important info in one clean, emoji-enhanced table.
 
-The only way I could get what I wanted was to learn basic Python and through aching trial and error, eventually write a script that does exactly what I wanted. This is Portsey.
+## 🧠 Why I Built This
 
-Getting Started:
+I couldn’t find a simple, complete tool to audit local ports across multiple environments. Everything online was either:
+- Too complex (chaining `lsof`, `netstat`, `ss`, `awk`, etc.),
+- Or too limited (missing Docker support or process names).
 
-Portsey the script has some Python modules it requires to functions so as a rule of thumb, always manage installing new Python modules and libraries while in virtual environments so you dont accidentaly break your systems Python.
+So I learned Python and built one myself. This is version 2 — leaner, cleaner, more portable.
 
-1) Create and/or activate your Python virtual environment because 
-  Linux/MacOS: python -m venv /path/to/new/virtual/environment
-  Windows: c:\>Python35\python -m venv c:\path\to\myenv
+---
 
-2) Activate your newly created virtual environment named "myenv".
-  Linux/MacOS: source myenv/bin/activate
-  Windows: C:\> myenv\Scripts\activate.bat
+## 📦 Requirements
 
-3) Install required Python module using pip3.
-   pip3 install prettytable
+- Python 3.6+ (Python 3.13+ recommended)
+- `lsof` (preinstalled on macOS/Linux)
+- `pip install` the following modules:
 
-4) Run the script with:
-   Python3 portsey.py
+```bash
+pip install -r requirements.txt
+```
 
-That's it! If you're into experimentation with home or cloud computer labs, or even anywhere in between a beginner and expert hacker tinkerer, then I promise Portsey will benefit you loads.
+### `requirements.txt` contents:
+```
+rich
+pyfiglet
+```
 
- Optional: For quick launch of the script, i recommend creating an alias for the "Python3 portsey.py" command so you could call on the script only with its alias "ie: ports" no matter where you are in your shell.
+---
 
+## 🛠️ Installation
+
+It's recommended to run Portsey in a Python virtual environment:
+
+```bash
+python3 -m venv portsey-env
+source portsey-env/bin/activate
+pip install -r requirements.txt
+```
+
+Then run the script:
+
+```bash
+python3 portsey.py
+```
+---
+
+## 🧪 Features
+
+- Shows active ports and the binaries behind them
+- Maps Docker containers to their exposed ports
+- Auto-labels known apps (like Chrome, Docker, VS Code) with smart glyphs
+- Handles systems where Docker is installed but not running
+- Friendly error messages
+
+---
+
+## 🧠 Platform Support
+
+| OS         | Status        |
+|------------|---------------|
+| macOS      | ✅ Supported  |
+| Linux      | ✅ Supported  |
+| Windows    | ❌ Not supported (yet) |
+
+---
+
+## 👀 Example Output
+
+When you run `ports`, you’ll see something like:
+
+```
+Port   | Service     | Binary     | Glyph | Container
+-----------------------------------------------------
+8080   | http-alt    | python3    | 🐍    | -
+5432   | postgres    | postgres   | 🐘    | my_db
+3000   | dev server  | node       | 🟢    | -
+```
+
+---
+
+## 🧼 Uninstall / Cleanup
+
+Just delete the folder and remove the alias from your shell config file (`~/.zshrc` or `~/.bashrc`).
+
+---
+
+## ✍️ Author
+
+Created with love and lots of trial-and-error by [joeyq](https://github.com/joeyqleq).
+
+---
